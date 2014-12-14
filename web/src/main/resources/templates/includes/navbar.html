@@ -1,0 +1,14 @@
+<div th:fragment="includes/navbar">
+	<nav class="navbar navbar-default" role="navigation" ng-controller="navbarCtrl">
+		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#" th:text="#{navbar.brand}">Lunchinator</a>
+			</div>
+
+			<ul class="nav navbar-nav">
+				<li ui-sref-active="active"><a ui-sref="home" th:text="#{navbar.home}">Home</a></li>
+				<li ui-sref-active="active"><a ui-sref="stuff" th:text="#{navbar.restaurants}">Restaurants</a></li>
+			</ul>
+		</div>
+	</nav>
+</div>
