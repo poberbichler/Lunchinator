@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Component
 @RequestMapping("templates")
 public class TemplateController {
-	@RequestMapping("stuff")
-	public String stuffPage() {
+	@RequestMapping("restaurants")
+	public String restaurantsPage() {
 		return "partials/restaurants";
 	}
 	

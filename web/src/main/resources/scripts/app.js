@@ -8,9 +8,9 @@
 			templateUrl: '/templates/home'
 		});
 		
-		$stateProvider.state('stuff', {
-			url: '/stuff',
-			templateUrl: '/templates/stuff'
+		$stateProvider.state('restaurants', {
+			url: '/restaurants',
+			templateUrl: '/templates/restaurants'
 		});
 		
 		$urlRouterProvider.otherwise('/home');
