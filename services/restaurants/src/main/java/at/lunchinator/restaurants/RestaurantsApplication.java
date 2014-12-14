@@ -1,4 +1,4 @@
-package at.lunchinator.web;
+package at.lunchinator.restaurants;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -11,16 +11,17 @@ import org.springframework.context.annotation.Configuration;
  * @author poberbichler
  * @since 12.2014
  */
-@Configuration
 @ComponentScan
+@Configuration
 @EnableAutoConfiguration
-public class LunchinatorApplication extends SpringBootServletInitializer {
+public class RestaurantsApplication extends SpringBootServletInitializer {
 	public static void main(String[] args) {
-		SpringApplication.run(LunchinatorApplication.class, args);
+		SpringApplication.run(RestaurantsApplication.class, args);
 	}
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(LunchinatorApplication.class);
+		return application.sources(RestaurantsApplication.class);
 	}
+
 }

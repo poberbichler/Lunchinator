@@ -10,13 +10,14 @@
 		
 		$stateProvider.state('restaurants', {
 			url: '/restaurants',
-			templateUrl: '/templates/restaurants'
+			templateUrl: '/templates/restaurants',
+			controller: 'RestaurantCtrl as restaurantCtrl'
 		});
 		
 		$urlRouterProvider.otherwise('/home');
 	}
 	
-	angular.module('lunchinator', ['ui.router'])
+	angular.module('lunchinator', ['ui.router', 'lunchinator.restaurants'])
 		.config(['$stateProvider', '$urlRouterProvider', Config])
 		.controller('navbarCtrl', [NavbarCtrl]);
 })();
