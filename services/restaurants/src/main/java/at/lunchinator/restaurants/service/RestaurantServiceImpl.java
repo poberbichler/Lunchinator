@@ -1,8 +1,6 @@
 package at.lunchinator.restaurants.service;
 
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +9,8 @@ import org.springframework.stereotype.Component;
 
 import at.lunchinator.restaurants.db.RestaurantRepository;
 import at.lunchinator.restaurants.domain.Restaurant;
+
+import com.google.common.base.Preconditions;
 
 /**
  * @author poberbichler
@@ -30,9 +30,13 @@ class RestaurantServiceImpl implements RestaurantService {
 	public Collection<Restaurant> findAll() {
 		logger.debug("find all restaurnts called {}", restaurantRepository.getClass());
 		
-		return Arrays.asList(
-				new Restaurant(UUID.randomUUID().toString(), "Hitomi"), 
-				new Restaurant(UUID.randomUUID().toString(), "Asia Paradies"));
+		return restaurantRepository.findAll();
+	}
+
+	@Override
+	public Restaurant saveRestaurant(final Restaurant restaurant) {
+		Preconditions.checkNotNull(restaurant, "restaurant must not be mull");
+		return restaurantRepository.save(restaurant);
 	}
 
 }

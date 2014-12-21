@@ -4,7 +4,9 @@ import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import at.lunchinator.restaurants.domain.Restaurant;
@@ -27,5 +29,10 @@ public class RestaurantEndpoint {
 	@RequestMapping(value = "all", produces = MediaType.APPLICATION_JSON_VALUE)
 	public Collection<Restaurant> findAll() {
 		return restaurantService.findAll();
+	}
+	
+	@RequestMapping(value = "save", method = RequestMethod.POST)
+	public Restaurant saveRestaurant(@RequestBody Restaurant restaurant) {
+		return restaurantService.saveRestaurant(restaurant);
 	}
 }

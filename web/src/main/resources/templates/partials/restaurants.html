@@ -4,3 +4,8 @@
 		{{::restaurant}}
 	</li>
 </ul>
+
+<form ng-submit="restaurantCtrl.doStuff()">
+	<input ng-model="restaurantCtrl.restaurant.name" />
+	<input type="submit" class="btn btn-primary" value="save" />
+</form>

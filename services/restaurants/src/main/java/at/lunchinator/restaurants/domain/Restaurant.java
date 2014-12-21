@@ -4,8 +4,10 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.data.annotation.Id;
 
+import com.google.common.base.Objects;
+
 /**
- * @author patrick
+ * @author poberbichler
  * @since 12.2014
  */
 public class Restaurant {
@@ -38,5 +40,32 @@ public class Restaurant {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	@Override
+	public String toString() {
+		return Objects.toStringHelper(this)
+				.add("id", id)
+				.add("name", name)
+				.toString();
+	}
+	
+	@Override
+	public boolean equals(Object that) {
+		if (this == that) {
+			return true;
+		}
+		
+		if (!(that instanceof Restaurant)) {
+			return false;
+		}
+		
+		final Restaurant thatRestaurant = (Restaurant) that;
+		return Objects.equal(this.id, thatRestaurant.id);
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hashCode(this.id);
 	}
 }
