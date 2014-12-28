@@ -1,0 +1,22 @@
+<h1>suggestions</h1>
+
+<form ng-submit="suggestionCtrl.save()">
+	<div class="form-group">
+		<label for="restaurantInput" th:text="#{suggestions.available.restaurants}">Available restaurant</label> 
+		<select id="restaurantInput" class="form-control" ng-model="suggestionCtrl.data.newSuggestion.restaurant" 
+			ng-options="restaurant.id as restaurant.name for restaurant in suggestionCtrl.data.availableRestaurants">
+		</select>
+	</div>
+	
+	<div class="form-group">
+		<label for="startTime" th:text="#{suggestions.start.time}">Start time</label>
+		<input ng-model="suggestionCtrl.data.newSuggestion.startTime" id="startTime" class="form-control"/>
+	</div>
+	
+	<div class="form-group">
+		<label for="endTime" th:text="#{suggestions.planned.end.time}">Planned end time</label>
+		<input ng-model="suggestionCtrl.data.newSuggestion.endTime" id="endTime" class="form-control" />
+	</div>
+	
+	<button type="submit" class="btn btn-default">Submit</button>
+</form>
