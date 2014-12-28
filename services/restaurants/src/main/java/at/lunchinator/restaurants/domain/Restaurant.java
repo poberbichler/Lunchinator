@@ -3,6 +3,7 @@ package at.lunchinator.restaurants.domain;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.google.common.base.Objects;
 
@@ -10,6 +11,7 @@ import com.google.common.base.Objects;
  * @author poberbichler
  * @since 12.2014
  */
+@Document
 public class Restaurant {
 	@Id
 	private String id;

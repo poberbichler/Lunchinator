@@ -16,7 +16,7 @@ public interface RestaurantService {
 	
 	/**
 	 * Saves the given {@link Restaurant}<br>
-	 * If it is a new {@link Restaurant}, it will be saved into the db. Otherwise a new one will be created 
+	 * If it is a new {@link Restaurant}, a new one will be created and saved in the db. Otherwise the existing {@link Restaurant} will be updated 
 	 * 
 	 * @param restaurant to be saved
 	 * @return the newly saved restaurant

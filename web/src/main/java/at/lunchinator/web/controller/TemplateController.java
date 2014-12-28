@@ -19,4 +19,9 @@ public class TemplateController {
 	public String homePage() {
 		return "partials/home";
 	}
+	
+	@RequestMapping("suggestions")
+	public String suggestionsPage() {
+		return "partials/suggestions";
+	}
 }

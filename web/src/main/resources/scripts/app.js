@@ -14,10 +14,16 @@
 			controller: 'RestaurantCtrl as restaurantCtrl'
 		});
 		
+		$stateProvider.state('suggestions', {
+			url: '/suggestions',
+			templateUrl: '/templates/suggestions',
+			controller: 'SuggestionCtrl as suggestionCtrl'
+		});
+		
 		$urlRouterProvider.otherwise('/home');
 	}
 	
-	angular.module('lunchinator', ['ui.router', 'lunchinator.restaurants'])
+	angular.module('lunchinator', ['ui.router', 'lunchinator.restaurants', 'lunchinator.suggestions'])
 		.config(['$stateProvider', '$urlRouterProvider', Config])
 		.controller('navbarCtrl', [NavbarCtrl]);
 })();
