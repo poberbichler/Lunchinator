@@ -20,7 +20,6 @@ class SuggestionServiceImpl implements SuggestionService {
 
 	@Autowired
 	public SuggestionServiceImpl(SuggestionRepository suggestionRepository) {
-		super();
 		this.suggestionRepository = suggestionRepository;
 	}
 

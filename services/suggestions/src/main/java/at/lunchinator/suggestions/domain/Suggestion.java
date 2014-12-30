@@ -8,6 +8,9 @@ import javax.validation.constraints.NotNull;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import at.lunchinator.suggestions.formatter.LocalDateTimeConverter;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
 
@@ -24,6 +27,7 @@ public class Suggestion {
 	private final String suggestedBy;
 
 	@NotNull
+	@JsonDeserialize(converter = LocalDateTimeConverter.class)
 	private final LocalDateTime suggestedAt;
 
 	@NotNull
@@ -31,10 +35,12 @@ public class Suggestion {
 
 	@Future
 	@NotNull
+	@JsonDeserialize(converter = LocalDateTimeConverter.class)
 	private LocalDateTime startTime;
 
 	@Future
 	@NotNull
+	@JsonDeserialize(converter = LocalDateTimeConverter.class)
 	private LocalDateTime endTime;
 	
 	private Suggestion() {
@@ -88,7 +94,7 @@ public class Suggestion {
 	public void setEndTime(LocalDateTime endTime) {
 		this.endTime = endTime;
 	}
-
+	
 	/**
 	 * @author poberbichler
 	 * @since 12.2014

@@ -25,15 +25,18 @@
 		}
 		
 		function save() {
+			console.log(suggestionData);
 			suggestionResource.save(suggestionData.newSuggestion, function(result) {
 				suggestionData.suggestions.push(result);
+				suggestionData.newSuggestion = {};
 			});
 		}
 	}
 	
 	function SuggestionResource($resource) {
 		return $resource('http://localhost:8082/suggestions/:methodName', {}, {
-			findAll: {method: 'GET', isArray: true, params: {methodName: 'all'}}
+			findAll: {method: 'GET', isArray: true, params: {methodName: 'all'}},
+			save: {method: 'POST', params: {methodName: 'save'}}
 		})
 	}
 	
