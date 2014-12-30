@@ -7,7 +7,7 @@
 	}
 	
 	function RestaurantResource($resource) {
-		return $resource('http://localhost:8081/restaurants/:methodName', {}, {
+		return $resource('http://localhost:8083/restaurants/:methodName', {}, {
 			save: {method: 'POST', params: {methodName: 'save'}},
 			findAll: {method: 'GET', isArray: true, params: {methodName: 'all'}},
 			findAvailable: {method: 'GET', isArray: true, params: {methodName: 'all'}}
@@ -29,7 +29,7 @@
 		}
 		
 		function save() {
-			restaurantResource.save(this.restaurantData.newRestaurant, function(result) {
+			restaurantResource.save(restaurantData.newRestaurant, function(result) {
 				restaurantData.restaurants.push(result);
 				restaurantData.newRestaurant = {};
 			});

@@ -5,6 +5,8 @@
 		<label for="restaurantInput" th:text="#{suggestions.available.restaurants}">Available restaurant</label> 
 		<select id="restaurantInput" class="form-control" ng-model="suggestionCtrl.data.newSuggestion.restaurant" 
 			ng-options="restaurant.id as restaurant.name for restaurant in suggestionCtrl.data.availableRestaurants">
+			
+			<option value="" th:text="#{commons.please.choose}">----please choose----</option>
 		</select>
 	</div>
 	
@@ -15,8 +17,18 @@
 	
 	<div class="form-group">
 		<label for="endTime" th:text="#{suggestions.planned.end.time}">Planned end time</label>
-		<input ng-model="suggestionCtrl.data.newSuggestion.endTime" id="endTime" class="form-control" />
+		<div class="dropdown">
+		    <a class="dropdown-toggle endtime" id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="">
+		        <div class="input-append">
+		        	<input type="text" class="form-control" data-ng-model="suggestionCtrl.data.newSuggestion.endTime" />
+		        	<span class="add-on"><i class="icon-calendar"></i></span>
+		        </div>
+		    </a>
+		    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+		        <datetimepicker data-ng-model="suggestionCtrl.data.newSuggestion.endTime" data-datetimepicker-config="{ dropdownSelector: '.endtime' }"/>
+		    </ul>
+		</div>
 	</div>
 	
-	<button type="submit" class="btn btn-default">Submit</button>
+	<button type="submit" class="btn btn-primary">Submit</button>
 </form>

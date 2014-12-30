@@ -23,7 +23,11 @@
 		$urlRouterProvider.otherwise('/home');
 	}
 	
-	angular.module('lunchinator', ['ui.router', 'lunchinator.restaurants', 'lunchinator.suggestions'])
+	angular.module('lunchinator', [
+	                               'ui.router',
+	                               'ui.bootstrap.datetimepicker',
+	                               'lunchinator.restaurants', 
+	                               'lunchinator.suggestions'])
 		.config(['$stateProvider', '$urlRouterProvider', Config])
 		.controller('navbarCtrl', [NavbarCtrl]);
 })();
