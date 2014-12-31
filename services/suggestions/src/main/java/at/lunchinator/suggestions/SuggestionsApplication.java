@@ -1,11 +1,16 @@
 package at.lunchinator.suggestions;
 
+import java.time.LocalDateTime;
+
 import org.apache.catalina.filters.CorsFilter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
+
+import at.lunchinator.commons.serializer.LocalDateTimeDeserializer;
 
 /**
  * @author poberbichler
@@ -20,6 +25,13 @@ public class SuggestionsApplication extends SpringBootServletInitializer {
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
 		return application.sources(SuggestionsApplication.class);
+	}
+	
+	@Bean
+	public Jackson2ObjectMapperBuilder jacksonMapper() {
+		final Jackson2ObjectMapperBuilder builder = new Jackson2ObjectMapperBuilder();
+		builder.deserializerByType(LocalDateTime.class, new LocalDateTimeDeserializer());
+		return builder;
 	}
 	
 	@Bean
