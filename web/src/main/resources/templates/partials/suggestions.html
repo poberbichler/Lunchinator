@@ -12,7 +12,18 @@
 	
 	<div class="form-group">
 		<label for="startTime" th:text="#{suggestions.start.time}">Start time</label>
-		<input ng-model="suggestionCtrl.data.newSuggestion.startTime" id="startTime" class="form-control"/>
+		<div class="dropdown">
+		    <a class="dropdown-toggle" id="starttimeToggle" role="button" data-toggle="dropdown" data-target="#" href="">
+		        <div class="input-group">
+		        	<input type="text" class="form-control" ng-model="suggestionCtrl.data.newSuggestion.startTime" />
+		        	<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+		        </div>
+		    </a>
+		    <ul class="dropdown-menu" role="menu">
+		        <datetimepicker data-ng-model="suggestionCtrl.data.newSuggestion.startTime" 
+					data-datetimepicker-config="{ dropdownSelector: '#starttimeToggle' }" />
+		    </ul>
+		</div>
 	</div>
 	
 	<div class="form-group">
@@ -25,7 +36,8 @@
 		        </div>
 		    </a>
 		    <ul class="dropdown-menu" role="menu">
-		        <datetimepicker data-ng-model="suggestionCtrl.data.newSuggestion.endTime" data-datetimepicker-config="{ dropdownSelector: '#endtimeToggle' }" />
+		        <datetimepicker data-ng-model="suggestionCtrl.data.newSuggestion.endTime"
+					data-datetimepicker-config="{ dropdownSelector: '#endtimeToggle' }" />
 		    </ul>
 		</div>
 	</div>

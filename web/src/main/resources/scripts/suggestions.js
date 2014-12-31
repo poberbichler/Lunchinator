@@ -18,10 +18,7 @@
 			suggestionData.suggestions = suggestionResource.findAll();
 			suggestionData.availableRestaurants = restaurantResource.findAvailable();
 	
-			suggestionData.newSuggestion = {
-					endTime: new Date(),
-					startTime: new Date()
-			};
+			suggestionData.newSuggestion = {};
 		}
 		
 		function save() {
