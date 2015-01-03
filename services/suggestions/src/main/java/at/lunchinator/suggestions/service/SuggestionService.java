@@ -5,7 +5,7 @@ import java.util.Collection;
 import at.lunchinator.suggestions.domain.Suggestion;
 
 /**
- * @author patrick
+ * @author poberbichler
  * @since 12.2014
  */
 public interface SuggestionService {

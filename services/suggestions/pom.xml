@@ -9,6 +9,7 @@
 		<spring-boot.version>1.2.0.RELEASE</spring-boot.version>
 		<java.version>1.8</java.version>
 		<guava.version>17.0</guava.version>
+		<hibernate-validator.version>5.1.3.Final</hibernate-validator.version>
 
 		<lunchinator.commons.version>0.0.1-SNAPSHOT</lunchinator.commons.version>
 	</properties>
@@ -38,6 +39,18 @@
 				<artifactId>commons-web</artifactId>
 				<version>${lunchinator.commons.version}</version>
 			</dependency>
+
+			<dependency>
+				<groupId>at.lunchinator</groupId>
+				<artifactId>commons-db</artifactId>
+				<version>${lunchinator.commons.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-validator</artifactId>
+				<version>${hibernate-validator.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
@@ -56,10 +69,20 @@
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>at.lunchinator</groupId>
 			<artifactId>commons-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>at.lunchinator</groupId>
+			<artifactId>commons-db</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
 		</dependency>
 	</dependencies>
 

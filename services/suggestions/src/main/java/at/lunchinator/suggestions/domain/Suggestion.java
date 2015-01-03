@@ -2,11 +2,12 @@ package at.lunchinator.suggestions.domain;
 
 import java.time.LocalDateTime;
 
-import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import at.lunchinator.commons.db.validation.Jsr310Future;
 
 import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
@@ -29,14 +30,17 @@ public class Suggestion {
 	@NotNull
 	private final String restaurant;
 
-	@Future
 	@NotNull
+	@Jsr310Future
 	private LocalDateTime startTime;
 
-	@Future
 	@NotNull
+	@Jsr310Future
 	private LocalDateTime endTime;
-	
+
+	/**
+	 * private default constructor, needed by various frameworks
+	 */
 	private Suggestion() {
 		this.id = null;
 		this.suggestedBy = null;
@@ -48,7 +52,7 @@ public class Suggestion {
 
 	private Suggestion(SuggestionBuilder builder) {
 		Preconditions.checkNotNull(builder, "suggestionsbuilder most not be null!");
-		
+
 		this.id = builder.id;
 		this.suggestedBy = builder.suggestedBy;
 		this.suggestedAt = builder.suggestedAt;
@@ -89,6 +93,18 @@ public class Suggestion {
 		this.endTime = endTime;
 	}
 	
+	@Override
+	public String toString() {
+		return Objects.toStringHelper(this)
+				.add("id", id)
+				.add("startTime", startTime)
+				.add("endTime", endTime)
+				.add("suggestedBy", suggestedBy)
+				.add("suggestedAt", suggestedAt)
+				.add("restaurant", restaurant)
+				.toString();
+	}
+
 	/**
 	 * @author poberbichler
 	 * @since 12.2014
@@ -134,11 +150,5 @@ public class Suggestion {
 		public Suggestion build() {
 			return new Suggestion(this);
 		}
-	}
-
-	@Override
-	public String toString() {
-		return Objects.toStringHelper(this).add("id", id).add("startTime", startTime).add("endTime", endTime)
-				.add("suggestedBy", suggestedBy).add("suggestedAt", suggestedAt).add("restaurant", restaurant).toString();
 	}
 }

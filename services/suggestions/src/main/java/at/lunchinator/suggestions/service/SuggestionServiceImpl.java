@@ -31,8 +31,9 @@ class SuggestionServiceImpl implements SuggestionService {
 	@Override
 	public Suggestion save(final Suggestion suggestion) {
 		Preconditions.checkNotNull(suggestion, "suggestion must not be null!");
+		suggestionRepository.save(suggestion);
 		
-		return null;
+		return suggestion;
 	}
 
 }
