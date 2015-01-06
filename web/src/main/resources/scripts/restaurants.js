@@ -6,8 +6,8 @@
 		restaurantService.init();
 	}
 	
-	function RestaurantResource($resource) {
-		return $resource('http://localhost:8083/restaurants/:methodName', {}, {
+	function RestaurantResource($resource, BASE_URLS) {
+		return $resource(BASE_URLS.restaurants + ':methodName', {}, {
 			save: {method: 'POST', params: {methodName: 'save'}},
 			findAll: {method: 'GET', isArray: true, params: {methodName: 'all'}},
 			findAvailable: {method: 'GET', isArray: true, params: {methodName: 'all'}}
@@ -38,6 +38,6 @@
 	
 	angular.module('lunchinator.restaurants', ['ngResource'])
 		.controller('RestaurantCtrl', ['RestaurantService', RestaurantsCtrl])
-		.factory('RestaurantResource', ['$resource', RestaurantResource])
+		.factory('RestaurantResource', ['$resource', 'BASE_URLS', RestaurantResource])
 		.factory('RestaurantService', ['RestaurantResource', RestaurantService])
 })();

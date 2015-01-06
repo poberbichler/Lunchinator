@@ -14,13 +14,16 @@ import com.google.common.base.Objects;
 @Document
 public class Restaurant {
 	@Id
-	private String id;
+	private final String id;
 
 	@NotNull
 	private String name;
 	
-	public Restaurant() {
-		
+	/**
+	 * private constructor, needed by various frameworks
+	 */
+	private Restaurant() {
+		this.id = null;
 	}
 	
 	public Restaurant(String id, String name) {
@@ -30,10 +33,6 @@ public class Restaurant {
 
 	public String getId() {
 		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
 	}
 
 	public String getName() {

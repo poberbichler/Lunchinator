@@ -104,7 +104,7 @@ public class Suggestion {
 				.add("restaurant", restaurant)
 				.toString();
 	}
-
+	
 	/**
 	 * @author poberbichler
 	 * @since 12.2014
