@@ -9,7 +9,7 @@
 		<spring-boot.version>1.2.0.RELEASE</spring-boot.version>
 		<java.version>1.8</java.version>
 		<guava.version>17.0</guava.version>
-		
+
 		<lunchinator.commons.version>0.0.1-SNAPSHOT</lunchinator.commons.version>
 	</properties>
 
@@ -26,16 +26,28 @@
 				<artifactId>spring-boot-starter-data-mongodb</artifactId>
 				<version>${spring-boot.version}</version>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>com.google.guava</groupId>
 				<artifactId>guava</artifactId>
 				<version>${guava.version}</version>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>at.lunchinator</groupId>
 				<artifactId>commons-web</artifactId>
+				<version>${lunchinator.commons.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>at.lunchinator</groupId>
+				<artifactId>commons-db</artifactId>
+				<version>${lunchinator.commons.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>at.lunchinator</groupId>
+				<artifactId>commons-config</artifactId>
 				<version>${lunchinator.commons.version}</version>
 			</dependency>
 		</dependencies>
@@ -51,10 +63,25 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-mongodb</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>at.lunchinator</groupId>
+			<artifactId>commons-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>at.lunchinator</groupId>
+			<artifactId>commons-db</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>at.lunchinator</groupId>
+			<artifactId>commons-config</artifactId>
 		</dependency>
 	</dependencies>
 

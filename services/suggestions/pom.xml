@@ -45,6 +45,12 @@
 				<artifactId>commons-db</artifactId>
 				<version>${lunchinator.commons.version}</version>
 			</dependency>
+			
+			<dependency>
+				<groupId>at.lunchinator</groupId>
+				<artifactId>commons-config</artifactId>
+				<version>${lunchinator.commons.version}</version>
+			</dependency>
 
 			<dependency>
 				<groupId>org.hibernate</groupId>
@@ -78,6 +84,11 @@
 		<dependency>
 			<groupId>at.lunchinator</groupId>
 			<artifactId>commons-db</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>at.lunchinator</groupId>
+			<artifactId>commons-config</artifactId>
 		</dependency>
 
 		<dependency>
