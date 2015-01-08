@@ -1,5 +1,6 @@
 package at.lunchinator.suggestions.service;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,9 @@ class SuggestionServiceImpl implements SuggestionService {
 	@Override
 	public Suggestion save(final Suggestion suggestion) {
 		Preconditions.checkNotNull(suggestion, "suggestion must not be null!");
+		
+		suggestion.setSuggestedAt(LocalDateTime.now());
+		suggestion.setSuggestedBy("PERSON");
 		suggestionRepository.save(suggestion);
 		
 		return suggestion;

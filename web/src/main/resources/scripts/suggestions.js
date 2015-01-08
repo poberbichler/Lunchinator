@@ -2,7 +2,9 @@
 	function SuggestionCtrl(suggestionService) {
 		this.data = suggestionService.data;
 		this.save = suggestionService.save;
+		
 		suggestionService.init();
+		console.log(this);
 	}
 	
 	function SuggestionService(suggestionResource, restaurantResource) {
@@ -23,6 +25,7 @@
 		
 		function save() {
 			suggestionResource.save(suggestionData.newSuggestion, function(result) {
+				console.log(result);
 				suggestionData.suggestions.push(result);
 				suggestionData.newSuggestion = {};
 			});

@@ -13,6 +13,7 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 import at.lunchinator.commons.db.converter.MongoConverters;
 import at.lunchinator.commons.serializer.LocalDateTimeDeserializer;
+import at.lunchinator.commons.serializer.LocalDateTimeSerializer;
 
 /**
  * Common beans needed by every LunchinatorEndpoint<br>
@@ -28,6 +29,7 @@ class LunchinatorDefaultEndpointConfiguration {
 	public Jackson2ObjectMapperBuilder jacksonMapper() {
 		final Jackson2ObjectMapperBuilder builder = new Jackson2ObjectMapperBuilder();
 		builder.deserializerByType(LocalDateTime.class, new LocalDateTimeDeserializer());
+		builder.serializerByType(LocalDateTime.class, new LocalDateTimeSerializer());
 		return builder;
 	}
 

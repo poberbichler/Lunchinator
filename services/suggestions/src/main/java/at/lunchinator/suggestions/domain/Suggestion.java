@@ -22,10 +22,10 @@ public class Suggestion {
 	private final String id;
 
 	@NotNull
-	private final String suggestedBy;
+	private String suggestedBy;
 
 	@NotNull
-	private final LocalDateTime suggestedAt;
+	private LocalDateTime suggestedAt;
 
 	@NotNull
 	private final String restaurant;
@@ -91,6 +91,14 @@ public class Suggestion {
 
 	public void setEndTime(LocalDateTime endTime) {
 		this.endTime = endTime;
+	}
+	
+	public void setSuggestedAt(LocalDateTime suggestedAt) {
+		this.suggestedAt = suggestedAt;
+	}
+	
+	public void setSuggestedBy(String suggestedBy) {
+		this.suggestedBy = suggestedBy;
 	}
 	
 	@Override

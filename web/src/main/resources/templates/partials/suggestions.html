@@ -1,5 +1,15 @@
 <h1>suggestions</h1>
 
+<div class="panel panel-primary" ng-repeat="suggestion in suggestionCtrl.data.suggestions">
+	<div class="panel-heading">Essen bei: {{::suggestion.restaurant}}</div>
+	<div class="panel-body">
+		by: {{::suggestion.suggestedBy}}<br />
+		at: {{::suggestion.restaurant}}<br />
+		from: {{::suggestion.startTime}}<br />
+		to: {{::suggestion.endTime}}
+	</div>
+</div> 
+
 <form ng-submit="suggestionCtrl.save()">
 	<div class="form-group">
 		<label for="restaurantInput" th:text="#{suggestions.available.restaurants}">Available restaurant</label> 
