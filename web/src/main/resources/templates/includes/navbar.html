@@ -10,6 +10,11 @@
 				<li ui-sref-active="active"><a ui-sref="restaurants" th:text="#{navbar.restaurants}">Restaurants</a></li>
 				<li ui-sref-active="active"><a ui-sref="suggestions" th:text="#{navbar.suggestions}">Suggestions</a></li>
 			</ul>
+			
+			<p class="navbar-text navbar-right ng-cloak">
+				<span th:text="#{navbar.signed.in.as}">Signed in as</span>
+				<span>{{userName}}</span>
+			</p>
 		</div>
 	</nav>
 </div>

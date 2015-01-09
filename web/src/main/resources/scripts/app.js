@@ -1,5 +1,6 @@
 (function() {
-	function NavbarCtrl() {
+	function NavbarCtrl($scope) {
+		$scope.userName = 'poberbichler'
 	}
 	
 	function Config($stateProvider, $urlRouterProvider) {
@@ -31,5 +32,5 @@
 	                               'lunchinator.config',
 	                               'lunchinator.authorization'])
 		.config(['$stateProvider', '$urlRouterProvider', Config])
-		.controller('navbarCtrl', [NavbarCtrl]);
+		.controller('navbarCtrl', ['$scope', NavbarCtrl]);
 })();
