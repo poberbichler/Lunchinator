@@ -3,6 +3,7 @@ package at.lunchinator.commons.config;
 import java.time.LocalDateTime;
 
 import org.apache.catalina.filters.CorsFilter;
+import org.springframework.boot.context.embedded.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportSelector;
@@ -25,6 +26,8 @@ import at.lunchinator.commons.serializer.LocalDateTimeSerializer;
  */
 @Configuration
 class LunchinatorDefaultEndpointConfiguration {
+	private static final String ALLOWED_HTTP_HEADERS = CorsFilter.DEFAULT_ALLOWED_HTTP_HEADERS + ",Authorization";
+
 	@Bean
 	public Jackson2ObjectMapperBuilder jacksonMapper() {
 		final Jackson2ObjectMapperBuilder builder = new Jackson2ObjectMapperBuilder();
@@ -39,8 +42,11 @@ class LunchinatorDefaultEndpointConfiguration {
 	}
 
 	@Bean
-	public CorsFilter corsFilter() {
-		return new CorsFilter();
+	public FilterRegistrationBean filterRegistration() {
+		final FilterRegistrationBean registrationBean = new FilterRegistrationBean(new CorsFilter());
+		registrationBean.addInitParameter(CorsFilter.PARAM_CORS_ALLOWED_HEADERS, ALLOWED_HTTP_HEADERS);
+
+		return registrationBean;
 	}
 
 	@Bean

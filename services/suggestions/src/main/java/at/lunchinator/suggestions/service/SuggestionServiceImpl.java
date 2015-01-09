@@ -34,7 +34,6 @@ class SuggestionServiceImpl implements SuggestionService {
 		Preconditions.checkNotNull(suggestion, "suggestion must not be null!");
 		
 		suggestion.setSuggestedAt(LocalDateTime.now());
-		suggestion.setSuggestedBy("PERSON");
 		suggestionRepository.save(suggestion);
 		
 		return suggestion;

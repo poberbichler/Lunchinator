@@ -28,7 +28,8 @@
 	                               'ui.bootstrap.datetimepicker',
 	                               'lunchinator.restaurants', 
 	                               'lunchinator.suggestions',
-	                               'lunchinator.config'])
+	                               'lunchinator.config',
+	                               'lunchinator.authorization'])
 		.config(['$stateProvider', '$urlRouterProvider', Config])
 		.controller('navbarCtrl', [NavbarCtrl]);
 })();
