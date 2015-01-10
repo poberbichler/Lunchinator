@@ -15,6 +15,8 @@ import org.junit.runners.Parameterized.Parameters;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import at.lunchinator.commons.serialization.LocalDateTimeDeserializer;
+
 import com.fasterxml.jackson.core.JsonParser;
 
 /**

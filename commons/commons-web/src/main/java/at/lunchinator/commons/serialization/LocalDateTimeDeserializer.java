@@ -1,4 +1,4 @@
-package at.lunchinator.commons.serializer;
+package at.lunchinator.commons.serialization;
 
 import java.io.IOException;
 import java.time.LocalDateTime;

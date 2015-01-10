@@ -13,8 +13,9 @@ import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 import at.lunchinator.commons.db.converter.MongoConverters;
-import at.lunchinator.commons.serializer.LocalDateTimeDeserializer;
-import at.lunchinator.commons.serializer.LocalDateTimeSerializer;
+import at.lunchinator.commons.error.LunchinatorExceptionHandler;
+import at.lunchinator.commons.serialization.LocalDateTimeDeserializer;
+import at.lunchinator.commons.serialization.LocalDateTimeSerializer;
 
 /**
  * Common beans needed by every LunchinatorEndpoint<br>
@@ -57,5 +58,10 @@ class LunchinatorDefaultEndpointConfiguration {
 	@Bean
 	public LocalValidatorFactoryBean validator() {
 		return new LocalValidatorFactoryBean();
+	}
+	
+	@Bean
+	public LunchinatorExceptionHandler exceptionHandler() {
+		return new LunchinatorExceptionHandler();
 	}
 }
