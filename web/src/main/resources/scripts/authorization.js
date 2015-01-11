@@ -1,9 +1,9 @@
 (function() {
 	function HttpAuthorizationRequestInterceptor() {
 		return {
-			request: function(config) {
-				config.headers['Authorization'] = 'USER_ID';
-				return config;
+			'request': function(request) {
+				request.headers['Authorization'] = 'USER_ID';
+				return request;
 			}
 		}
 	}

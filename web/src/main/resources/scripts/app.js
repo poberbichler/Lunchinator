@@ -25,12 +25,13 @@
 	}
 	
 	angular.module('lunchinator', [
-	                               'ui.router',
-	                               'ui.bootstrap.datetimepicker',
-	                               'lunchinator.restaurants', 
-	                               'lunchinator.suggestions',
-	                               'lunchinator.config',
-	                               'lunchinator.authorization'])
-		.config(['$stateProvider', '$urlRouterProvider', Config])
-		.controller('navbarCtrl', ['$scope', NavbarCtrl]);
+		'ui.router',
+		'ui.bootstrap.datetimepicker',
+		'lunchinator.restaurants',
+		'lunchinator.suggestions',
+		'lunchinator.config',
+		'lunchinator.authorization',
+		'lunchinator.error'])
+			.config(['$stateProvider', '$urlRouterProvider', Config])
+			.controller('navbarCtrl', ['$scope', NavbarCtrl]);
 })();

@@ -4,7 +4,6 @@
 		this.save = suggestionService.save;
 		
 		suggestionService.init();
-		console.log(this);
 	}
 	
 	function SuggestionService(suggestionResource, restaurantResource) {
