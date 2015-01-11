@@ -29,8 +29,7 @@
         }
 
         function reset() {
-            console.log('resetting errors', errors);
-            errors = [];
+            errors.length = 0;
         }
     }
 
@@ -39,12 +38,12 @@
             restrict: 'E',
             scope: {},
             template:
-                '<div class="alert alert-danger" role="alert">' +
+                '<div class="alert alert-danger" role="alert" ng-show="errors.length !== 0">' +
+                    '<button ng-click="reset()" type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
                     '<strong>Error </strong>' +
                     '<ul ng-repeat="error in errors">' +
                         '<li>{{error}}</li>' +
                     '</ul>' +
-                    '<a ng-click="reset()" href>reset</a>' +
                 '</div>',
             link: function(scope) {
                 scope.errors = errorService.errors;
