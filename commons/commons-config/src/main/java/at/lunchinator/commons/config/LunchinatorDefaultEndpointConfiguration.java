@@ -28,8 +28,8 @@ import at.lunchinator.commons.serialization.LocalDateTimeSerializer;
  */
 @Configuration
 class LunchinatorDefaultEndpointConfiguration {
-	private static final String ALLOWED_HTTP_HEADERS = CorsFilter.DEFAULT_ALLOWED_HTTP_HEADERS + ",Authorization";
 	private static final String BUNDLE_BASE_NAME = "messages";
+	private static final String ALLOWED_HTTP_HEADERS = CorsFilter.DEFAULT_ALLOWED_HTTP_HEADERS + ",Authorization";
 
 	@Bean
 	public Jackson2ObjectMapperBuilder jacksonMapper() {

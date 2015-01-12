@@ -19,10 +19,7 @@ public class Restaurant {
 	@NotNull
 	private String name;
 	
-	/**
-	 * private constructor, needed by various frameworks
-	 */
-	private Restaurant() {
+	public Restaurant() {
 		this.id = null;
 	}
 	

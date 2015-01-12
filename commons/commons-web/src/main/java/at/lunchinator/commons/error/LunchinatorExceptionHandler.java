@@ -35,13 +35,20 @@ public class LunchinatorExceptionHandler {
 		final Locale locale = LocaleContextHolder.getLocale();
 		
 		for (final ConstraintViolation<?> violation : caughtException.getConstraintViolations()) {
-			final Class<?> rootBeanClass = violation.getRootBeanClass();
-			
-			final String field = messageSource.getMessage(rootBeanClass.getSimpleName() + "." + violation.getPropertyPath().toString(), null, locale);
+			final String field = messageSource.getMessage(convertToProperty(violation), null, locale);
 			final String message = messageSource.getMessage(violation.getMessageTemplate(), null, locale);
+			
 			result.add(new ErrorContainer(field, message));
 		}
 
 		return result;
+	}
+	
+	private String convertToProperty(final ConstraintViolation<?> violation) {
+		final StringBuilder builder = new StringBuilder();
+		builder.append(violation.getRootBeanClass().getSimpleName()).append(".")
+			.append(violation.getPropertyPath().toString());
+		
+		return builder.toString();
 	}
 }
