@@ -8,7 +8,6 @@
                     });
                 }
 
-                console.log(errorService);
                 return $q.reject(response);
             }
         }
@@ -40,10 +39,10 @@
             template:
                 '<div class="alert alert-danger" role="alert" ng-show="errors.length !== 0">' +
                     '<button ng-click="reset()" type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
-                    '<strong>Error </strong>' +
-                    '<ul ng-repeat="error in errors">' +
-                        '<li>{{error}}</li>' +
-                    '</ul>' +
+                    '<p ng-repeat="error in errors">' +
+                    	'<strong>Error! </strong>' +
+                    	'{{::error.field}} {{::error.message}}.' +
+                    '</p>' +
                 '</div>',
             link: function(scope) {
                 scope.errors = errorService.errors;
