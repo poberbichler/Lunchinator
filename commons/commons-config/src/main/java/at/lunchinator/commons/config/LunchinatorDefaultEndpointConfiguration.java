@@ -7,6 +7,7 @@ import org.springframework.boot.context.embedded.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportSelector;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.data.mongodb.core.convert.CustomConversions;
 import org.springframework.data.mongodb.core.mapping.event.ValidatingMongoEventListener;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
@@ -28,6 +29,7 @@ import at.lunchinator.commons.serialization.LocalDateTimeSerializer;
 @Configuration
 class LunchinatorDefaultEndpointConfiguration {
 	private static final String ALLOWED_HTTP_HEADERS = CorsFilter.DEFAULT_ALLOWED_HTTP_HEADERS + ",Authorization";
+	private static final String BUNDLE_BASE_NAME = "messages";
 
 	@Bean
 	public Jackson2ObjectMapperBuilder jacksonMapper() {
@@ -59,9 +61,17 @@ class LunchinatorDefaultEndpointConfiguration {
 	public LocalValidatorFactoryBean validator() {
 		return new LocalValidatorFactoryBean();
 	}
-	
+
 	@Bean
 	public LunchinatorExceptionHandler exceptionHandler() {
-		return new LunchinatorExceptionHandler();
+		return new LunchinatorExceptionHandler(messageSource());
+	}
+	
+	@Bean
+	public ResourceBundleMessageSource messageSource() {
+		final ResourceBundleMessageSource source = new ResourceBundleMessageSource();
+		source.setBasenames(BUNDLE_BASE_NAME);
+		
+		return source;
 	}
 }
