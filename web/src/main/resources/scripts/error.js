@@ -3,7 +3,7 @@
         return {
             'responseError': function(response) {
                 if (response.status === 400) {
-                	errorService.reset();
+					errorService.reset();
                     angular.forEach(response.data, function(error) {
                         errorService.addError(error);
                     });
