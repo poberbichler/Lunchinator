@@ -1,6 +1,9 @@
 (function() {
-	function NavbarCtrl($scope) {
-		$scope.userName = 'poberbichler'
+	function NavbarCtrl($scope, authorizationService) {
+		$scope.userList = authorizationService.userList;
+		$scope.currentUser = authorizationService.getCurrentUser;
+
+		$scope.setCurrentUser = authorizationService.setCurrentUser;
 	}
 	
 	function Config($stateProvider, $urlRouterProvider) {
@@ -33,5 +36,5 @@
 		'lunchinator.authorization',
 		'lunchinator.error'])
 			.config(['$stateProvider', '$urlRouterProvider', Config])
-			.controller('navbarCtrl', ['$scope', NavbarCtrl]);
+			.controller('navbarCtrl', ['$scope', 'AuthorizationService', NavbarCtrl]);
 })();
