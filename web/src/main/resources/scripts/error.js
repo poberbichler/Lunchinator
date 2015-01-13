@@ -38,7 +38,7 @@
             restrict: 'E',
             scope: {},
             template:
-                '<div class="alert alert-danger" role="alert" ng-show="errors.length !== 0">' +
+                '<div id="error-directive" class="alert alert-danger" role="alert" ng-show="errors.length !== 0">' +
                     '<button ng-click="reset()" type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
                     '<p ng-repeat="error in errors">' +
                     	'<strong>Error! </strong>' +

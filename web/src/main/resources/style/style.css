@@ -5,3 +5,10 @@ div.datetimepicker {
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
 	display: none !important;
 }
+
+#error-directive {
+	position: fixed;
+	left: 81%;
+	right: 1%;
+	bottom: 0;
+}
