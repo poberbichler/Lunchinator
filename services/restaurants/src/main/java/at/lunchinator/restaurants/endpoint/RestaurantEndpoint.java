@@ -3,7 +3,7 @@ package at.lunchinator.restaurants.endpoint;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,7 +26,7 @@ public class RestaurantEndpoint {
 		this.restaurantService = restaurantService;
 	}
 
-	@RequestMapping(value = "all", produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping("all")
 	public Collection<Restaurant> findAll() {
 		return restaurantService.findAll();
 	}
@@ -34,5 +34,10 @@ public class RestaurantEndpoint {
 	@RequestMapping(value = "save", method = RequestMethod.POST)
 	public Restaurant saveRestaurant(@RequestBody Restaurant restaurant) {
 		return restaurantService.saveRestaurant(restaurant);
+	}
+	
+	@RequestMapping("{restaurantId}")
+	public Restaurant findById(@PathVariable("restaurantId") String restaurantId) {
+		return restaurantService.findById(restaurantId);
 	}
 }

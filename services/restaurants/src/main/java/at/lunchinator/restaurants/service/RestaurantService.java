@@ -22,4 +22,10 @@ public interface RestaurantService {
 	 * @return the newly saved restaurant
 	 */
 	Restaurant saveRestaurant(Restaurant restaurant);
+
+	/**
+	 * @param restaurantId must not be {@code null}
+	 * @return {@link Restaurant} with the given id
+	 */
+	Restaurant findById(String restaurantId);
 }

@@ -8,7 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.google.common.base.Preconditions;
 
-import at.lunchinator.suggestions.db.SuggestionRepository;
+import at.lunchinator.suggestions.data.db.SuggestionRepository;
+import at.lunchinator.suggestions.data.rest.RestaurantRepository;
 import at.lunchinator.suggestions.domain.Suggestion;
 
 /**
@@ -18,10 +19,12 @@ import at.lunchinator.suggestions.domain.Suggestion;
 @Service
 class SuggestionServiceImpl implements SuggestionService {
 	private final SuggestionRepository suggestionRepository;
+	private final RestaurantRepository restaurantRepository;
 
 	@Autowired
-	public SuggestionServiceImpl(SuggestionRepository suggestionRepository) {
+	public SuggestionServiceImpl(SuggestionRepository suggestionRepository, RestaurantRepository restaurantRepository) {
 		this.suggestionRepository = suggestionRepository;
+		this.restaurantRepository = restaurantRepository;
 	}
 
 	@Override

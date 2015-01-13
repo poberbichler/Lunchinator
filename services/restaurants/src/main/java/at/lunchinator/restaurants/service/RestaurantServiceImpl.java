@@ -29,14 +29,20 @@ class RestaurantServiceImpl implements RestaurantService {
 	@Override
 	public Collection<Restaurant> findAll() {
 		logger.debug("find all restaurnts called {}", restaurantRepository.getClass());
-		
 		return restaurantRepository.findAll();
 	}
 
 	@Override
 	public Restaurant saveRestaurant(final Restaurant restaurant) {
 		Preconditions.checkNotNull(restaurant, "restaurant must not be mull");
+		
+		logger.debug("saving restaurant [{}]", restaurant);
 		return restaurantRepository.save(restaurant);
 	}
 
+	@Override
+	public Restaurant findById(final String restaurantId) {
+		Preconditions.checkNotNull(restaurantId, "restaurantId must not be null");
+		return restaurantRepository.findOne(restaurantId);
+	}
 }
