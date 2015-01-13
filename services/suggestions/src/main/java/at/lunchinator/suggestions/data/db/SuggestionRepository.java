@@ -1,4 +1,4 @@
-package at.lunchinator.suggestions.db;
+package at.lunchinator.suggestions.data.db;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
