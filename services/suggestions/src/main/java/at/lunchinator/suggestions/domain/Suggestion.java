@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import at.lunchinator.commons.db.validation.Jsr310Future;
@@ -37,6 +38,17 @@ public class Suggestion {
 	@NotNull
 	@Jsr310Future
 	private LocalDateTime endTime;
+	
+	@Transient
+	private RestaurantDTO fullRestaurant;
+	
+	public RestaurantDTO getFullRestaurant() {
+		return fullRestaurant;
+	}
+	
+	public void setFullRestaurant(RestaurantDTO fullRestaurant) {
+		this.fullRestaurant = fullRestaurant;
+	}
 
 	/**
 	 * private default constructor, needed by various frameworks

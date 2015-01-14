@@ -16,6 +16,12 @@ public interface RestaurantRepository {
 	RestaurantDTO findById(String restaurantId);
 	
 	/**
+	 * @param restaurantIds must not be {@code null}
+	 * @return a list {@link RestaurantDTO} for the given restaurantIds (never {@code null})
+	 */
+	Collection<RestaurantDTO> findByIds(Collection<String> restaurantIds);
+	
+	/**
 	 * @return a {@link Collection} of every {@link RestaurantDTO} available
 	 */
 	Collection<RestaurantDTO> findAll();

@@ -2,16 +2,19 @@ package at.lunchinator.suggestions.service;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
-import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.google.common.base.Preconditions;
-
 import at.lunchinator.suggestions.data.db.SuggestionRepository;
 import at.lunchinator.suggestions.data.rest.RestaurantRepository;
+import at.lunchinator.suggestions.domain.RestaurantDTO;
 import at.lunchinator.suggestions.domain.Suggestion;
+
+import com.google.common.base.Preconditions;
 
 /**
  * @author poberbichler
@@ -30,7 +33,15 @@ class SuggestionServiceImpl implements SuggestionService {
 
 	@Override
 	public Collection<Suggestion> findAll() {
-		List<Suggestion> suggestions = suggestionRepository.findAll();
+		final Collection<Suggestion> suggestions = suggestionRepository.findAll();
+		final Collection<String> restaurantSet = suggestions.parallelStream()
+				.map(Suggestion::getRestaurant)
+				.collect(Collectors.toSet());
+		
+		final Collection<RestaurantDTO> restaurants = restaurantRepository.findByIds(restaurantSet);
+		final Map<String, RestaurantDTO> restaurantMap = restaurants.stream().collect(Collectors.toMap(RestaurantDTO::getId, Function.identity()));
+		suggestions.stream().forEach(suggestion -> suggestion.setFullRestaurant(restaurantMap.get(suggestion.getRestaurant())));
+		
 		return suggestions;
 	}
 

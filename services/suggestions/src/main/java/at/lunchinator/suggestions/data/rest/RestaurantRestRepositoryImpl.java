@@ -1,5 +1,6 @@
 package at.lunchinator.suggestions.data.rest;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -26,6 +27,13 @@ class RestaurantRestRepositoryImpl implements RestaurantRepository {
 		
 		RestaurantDTO restaurant = restTemplate.getForObject("http://localhost:8083/restaurants/{restaurantId}", RestaurantDTO.class, restaurantId);
 		return restaurant;
+	}
+	
+	@Override
+	public Collection<RestaurantDTO> findByIds(final Collection<String> restaurantIds) {
+		Preconditions.checkNotNull(restaurantIds, "restaurantIds must not be null");
+		RestaurantDTO restaurant = restTemplate.getForObject("http://localhost:8083/restaurants/{restaurantId}", RestaurantDTO.class, restaurantIds.stream().findAny().get());
+		return Arrays.asList(restaurant);
 	}
 
 	@Override
