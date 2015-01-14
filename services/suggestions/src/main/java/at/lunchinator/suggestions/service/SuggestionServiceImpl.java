@@ -2,6 +2,7 @@ package at.lunchinator.suggestions.service;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,8 @@ class SuggestionServiceImpl implements SuggestionService {
 
 	@Override
 	public Collection<Suggestion> findAll() {
-		return suggestionRepository.findAll();
+		List<Suggestion> suggestions = suggestionRepository.findAll();
+		return suggestions;
 	}
 
 	@Override

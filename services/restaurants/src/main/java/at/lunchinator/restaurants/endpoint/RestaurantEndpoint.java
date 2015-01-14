@@ -40,4 +40,9 @@ public class RestaurantEndpoint {
 	public Restaurant findById(@PathVariable("restaurantId") String restaurantId) {
 		return restaurantService.findById(restaurantId);
 	}
+	
+	@RequestMapping(value = "/string/{restaurantId}")
+	public String findStringById(@PathVariable("restaurantId") String restaurantId) {
+		return restaurantService.findById(restaurantId).toString();
+	}
 }
