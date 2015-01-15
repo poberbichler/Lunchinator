@@ -1,10 +1,10 @@
 <h1>suggestions</h1>
 
 <div class="panel panel-primary" ng-repeat="suggestion in suggestionCtrl.data.suggestions">
-	<div class="panel-heading">Essen bei: {{::suggestion.restaurant}}</div>
+	<div class="panel-heading">Essen bei: {{::suggestion.fullRestaurant.name}}</div>
 	<div class="panel-body">
 		by: {{::suggestion.suggestedBy}}<br />
-		at: {{::suggestion.restaurant}}<br />
+		name: {{::suggestion.fullRestaurant.name}<br />
 		from: {{::suggestion.startTime}}<br />
 		to: {{::suggestion.endTime}}
 	</div>
