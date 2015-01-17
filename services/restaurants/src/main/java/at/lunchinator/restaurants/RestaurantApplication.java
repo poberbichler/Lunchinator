@@ -13,13 +13,13 @@ import at.lunchinator.commons.config.LunchinatorEndpoint;
  */
 @LunchinatorEndpoint
 @SpringBootApplication
-public class RestaurantsApplication extends SpringBootServletInitializer {
+public class RestaurantApplication extends SpringBootServletInitializer {
 	public static void main(String[] args) {
-		SpringApplication.run(RestaurantsApplication.class, args);
+		SpringApplication.run(RestaurantApplication.class, args);
 	}
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(RestaurantsApplication.class);
+		return application.sources(RestaurantApplication.class);
 	}
 }
