@@ -3,7 +3,18 @@
 		this.data = suggestionService.data;
 		this.save = suggestionService.save;
 		
+		this.upvote = upvote;
+		this.downvote = downvote;
+		
 		suggestionService.init();
+
+		function upvote(suggestion) {
+			suggestionService.vote(suggestion, true);
+		}
+		
+		function downvote(suggestion) {
+			suggestionService.vote(suggestion, false);
+		}
 	}
 	
 	function SuggestionService(suggestionResource, restaurantResource) {
@@ -12,7 +23,8 @@
 		return {
 			data: suggestionData,
 			init: init,
-			save: save
+			save: save,
+			vote: vote
 		}
 		
 		function init() {
@@ -24,10 +36,13 @@
 		
 		function save() {
 			suggestionResource.save(suggestionData.newSuggestion, function(result) {
-				console.log(result);
 				suggestionData.suggestions.push(result);
 				suggestionData.newSuggestion = {};
 			});
+		}
+		
+		function vote(suggestion, therefor) {
+			console.log('this suggestion got voted', suggestion, therefor)
 		}
 	}
 	

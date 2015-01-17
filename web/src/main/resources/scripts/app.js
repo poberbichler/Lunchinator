@@ -34,7 +34,8 @@
 		'lunchinator.suggestions',
 		'lunchinator.config',
 		'lunchinator.authorization',
-		'lunchinator.error'])
+		'lunchinator.error',
+		'lunchinator.voting'])
 			.config(['$stateProvider', '$urlRouterProvider', Config])
 			.controller('navbarCtrl', ['$scope', 'AuthorizationService', NavbarCtrl]);
 })();

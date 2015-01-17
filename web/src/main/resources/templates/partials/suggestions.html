@@ -1,14 +1,20 @@
-<h1>suggestions</h1>
+<div class="row">
+	<div class="col-md-6" ng-repeat="suggestion in suggestionCtrl.data.suggestions">
+		<div class="panel panel-primary">
+			<div class="panel-heading">Suggestion to go to: {{::suggestion.fullRestaurant.name}}</div>
+			<div class="panel-body">
+				by: {{::suggestion.suggestedBy}}<br />
+				restaurant: {{::suggestion.fullRestaurant.name}}<br />
+				from: {{::suggestion.startTime | date:'medium' }}<br />
+				to: {{::suggestion.endTime | date:'medium'}}<br />
 
-<div class="panel panel-primary" ng-repeat="suggestion in suggestionCtrl.data.suggestions">
-	<div class="panel-heading">Essen bei: {{::suggestion.fullRestaurant.name}}</div>
-	<div class="panel-body">
-		by: {{::suggestion.suggestedBy}}<br />
-		name: {{::suggestion.fullRestaurant.name}<br />
-		from: {{::suggestion.startTime}}<br />
-		to: {{::suggestion.endTime}}
+				<voting-directive element="suggestion"></voting-directive>
+			</div>
+				
+		</div> 
 	</div>
-</div> 
+</div>
+
 
 <form ng-submit="suggestionCtrl.save()">
 	<div class="form-group">

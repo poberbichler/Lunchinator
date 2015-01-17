@@ -12,3 +12,16 @@ div.datetimepicker {
 	right: 1%;
 	bottom: 0;
 }
+
+.voting-input {
+	font-size: 35px;
+	margin-top: 10px;
+}
+
+.voting-input span {
+	margin: 0 5px;
+}
+
+.voting-input span a {
+	text-decoration: none;
+}
