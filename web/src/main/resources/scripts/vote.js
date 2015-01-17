@@ -12,15 +12,13 @@
 				'</div>',
 				
 			link: function(scope) {
+				scope.upvotes = 0;
+				scope.downvotes = 0;
+				
 				votingResource.findByTarget({targetId: scope.votedElement.id}, function(result) {
-					var upvotes = 0;
-					var downvotes = 0;
 					angular.forEach(result, function(vote) {
-						vote.upvote ? upvotes++ : downvotes++;
+						vote.upvote ? scope.upvotes++ : scope.downvotes++;
 					});
-					
-					scope.upvotes = upvotes;
-					scope.downvotes = downvotes;
 				});
 				
 				scope.upvote = function() {
