@@ -28,4 +28,6 @@ public interface RestaurantService {
 	 * @return {@link Restaurant} with the given id
 	 */
 	Restaurant findById(String restaurantId);
+	
+	Collection<Restaurant> findByIds(Collection<String> restaurantIds);
 }

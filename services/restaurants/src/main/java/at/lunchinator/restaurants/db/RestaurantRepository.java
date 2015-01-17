@@ -9,5 +9,5 @@ import at.lunchinator.restaurants.domain.Restaurant;
  * @since 12.2014
  */
 public interface RestaurantRepository extends MongoRepository<Restaurant, String> {
-
+	
 }

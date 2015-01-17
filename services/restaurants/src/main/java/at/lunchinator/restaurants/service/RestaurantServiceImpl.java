@@ -11,6 +11,7 @@ import at.lunchinator.restaurants.db.RestaurantRepository;
 import at.lunchinator.restaurants.domain.Restaurant;
 
 import com.google.common.base.Preconditions;
+import com.google.common.collect.Lists;
 
 /**
  * @author poberbichler
@@ -44,5 +45,11 @@ class RestaurantServiceImpl implements RestaurantService {
 	public Restaurant findById(final String restaurantId) {
 		Preconditions.checkNotNull(restaurantId, "restaurantId must not be null");
 		return restaurantRepository.findOne(restaurantId);
+	}
+
+	@Override
+	public Collection<Restaurant> findByIds(Collection<String> restaurantIds) {
+		Preconditions.checkNotNull(restaurantIds, "restaurantIds must not be null");
+		return Lists.newArrayList(restaurantRepository.findAll(restaurantIds));
 	}
 }

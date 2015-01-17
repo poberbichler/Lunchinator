@@ -1,5 +1,6 @@
 package at.lunchinator.restaurants.endpoint;
 
+import java.util.Arrays;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,5 +40,10 @@ public class RestaurantEndpoint {
 	@RequestMapping("{restaurantId}")
 	public Restaurant findById(@PathVariable("restaurantId") String restaurantId) {
 		return restaurantService.findById(restaurantId);
+	}
+	
+	@RequestMapping("multiple/[{restaurantIds[]}]")
+	public Collection<Restaurant> findByIds(@PathVariable("restaurantIds[]") String[] restaurantIds) {
+		return restaurantService.findByIds(Arrays.asList(restaurantIds));
 	}
 }

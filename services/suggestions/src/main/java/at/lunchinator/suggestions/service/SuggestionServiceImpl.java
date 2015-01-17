@@ -39,8 +39,11 @@ class SuggestionServiceImpl implements SuggestionService {
 				.collect(Collectors.toSet());
 		
 		final Collection<RestaurantDTO> restaurants = restaurantRepository.findByIds(restaurantSet);
-		final Map<String, RestaurantDTO> restaurantMap = restaurants.stream().collect(Collectors.toMap(RestaurantDTO::getId, Function.identity()));
-		suggestions.stream().forEach(suggestion -> suggestion.setFullRestaurant(restaurantMap.get(suggestion.getRestaurant())));
+		final Map<String, RestaurantDTO> restaurantMap = restaurants.parallelStream()
+				.collect(Collectors.toMap(RestaurantDTO::getId, Function.identity()));
+		
+		suggestions.parallelStream().forEach(suggestion -> 
+				suggestion.setFullRestaurant(restaurantMap.get(suggestion.getRestaurant())));
 		
 		return suggestions;
 	}

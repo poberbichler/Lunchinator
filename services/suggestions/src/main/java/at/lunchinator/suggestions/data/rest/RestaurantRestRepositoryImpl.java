@@ -2,7 +2,6 @@ package at.lunchinator.suggestions.data.rest;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
@@ -21,23 +20,27 @@ import com.google.common.base.Preconditions;
 class RestaurantRestRepositoryImpl implements RestaurantRepository {
 	private static final RestTemplate restTemplate = new RestTemplate();
 	
+	private static final String BASE_URL = "http://localhost:8083/restaurants/";
+	
 	@Override
 	public RestaurantDTO findById(final String restaurantId) {
 		Preconditions.checkNotNull(restaurantId, "restaurantId must not be null");
 		
-		RestaurantDTO restaurant = restTemplate.getForObject("http://localhost:8083/restaurants/{restaurantId}", RestaurantDTO.class, restaurantId);
-		return restaurant;
+		return restTemplate.getForObject(BASE_URL + "{restaurantId}", RestaurantDTO.class, restaurantId);
 	}
 	
 	@Override
 	public Collection<RestaurantDTO> findByIds(final Collection<String> restaurantIds) {
 		Preconditions.checkNotNull(restaurantIds, "restaurantIds must not be null");
-		RestaurantDTO restaurant = restTemplate.getForObject("http://localhost:8083/restaurants/{restaurantId}", RestaurantDTO.class, restaurantIds.stream().findAny().get());
-		return Arrays.asList(restaurant);
+		
+		final RestaurantDTO[] restaurants = restTemplate.getForObject(BASE_URL + "multiple/{restaurantIds}", 
+				RestaurantDTO[].class, restaurantIds);
+		
+		return Arrays.asList(restaurants);
 	}
 
 	@Override
 	public Collection<RestaurantDTO> findAll() {
-		return Collections.emptyList();
+		return Arrays.asList(restTemplate.getForObject(BASE_URL + "all", RestaurantDTO[].class));
 	}
 }
