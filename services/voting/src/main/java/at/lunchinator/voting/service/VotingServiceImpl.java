@@ -6,6 +6,7 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import at.lunchinator.commons.jms.MessageSendingService;
 import at.lunchinator.voting.data.db.VoteRepository;
 import at.lunchinator.voting.domain.Vote;
 
@@ -18,10 +19,12 @@ import com.google.common.base.Preconditions;
 @Service
 class VotingServiceImpl implements VotingService {
 	private final VoteRepository voteRepository;
+	private final MessageSendingService<Vote> messageSendingService;
 
 	@Autowired
-	public VotingServiceImpl(VoteRepository voteRepository) {
+	public VotingServiceImpl(VoteRepository voteRepository, MessageSendingService<Vote> messageSendingService) {
 		this.voteRepository = voteRepository;
+		this.messageSendingService = messageSendingService;
 	}
 
 	@Override
@@ -36,6 +39,8 @@ class VotingServiceImpl implements VotingService {
 		
 		vote.setCreatedAt(LocalDateTime.now());
 		voteRepository.save(vote);
+		
+		messageSendingService.sendMessage(vote);
 		
 		return vote;
 	}

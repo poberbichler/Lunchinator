@@ -42,14 +42,15 @@ public class Suggestion {
 	@Transient
 	private RestaurantDTO fullRestaurant;
 	
-	public RestaurantDTO getFullRestaurant() {
-		return fullRestaurant;
+	private int totalVotes = 0;
+	
+	/**
+	 * adds a single vote to the vote counter
+	 */
+	public void addToTotalVote() {
+		this.totalVotes++;
 	}
 	
-	public void setFullRestaurant(RestaurantDTO fullRestaurant) {
-		this.fullRestaurant = fullRestaurant;
-	}
-
 	/**
 	 * private default constructor, needed by various frameworks
 	 */
@@ -113,6 +114,18 @@ public class Suggestion {
 		this.suggestedBy = suggestedBy;
 	}
 	
+	public int getTotalVotes() {
+		return totalVotes;
+	}
+	
+	public RestaurantDTO getFullRestaurant() {
+		return fullRestaurant;
+	}
+	
+	public void setFullRestaurant(RestaurantDTO fullRestaurant) {
+		this.fullRestaurant = fullRestaurant;
+	}
+	
 	@Override
 	public String toString() {
 		return Objects.toStringHelper(this)
@@ -122,6 +135,7 @@ public class Suggestion {
 				.add("suggestedBy", suggestedBy)
 				.add("suggestedAt", suggestedAt)
 				.add("restaurant", restaurant)
+				.add("totalVotes", totalVotes)
 				.toString();
 	}
 	

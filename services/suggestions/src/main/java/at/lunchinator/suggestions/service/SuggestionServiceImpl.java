@@ -58,4 +58,19 @@ class SuggestionServiceImpl implements SuggestionService {
 		return suggestion;
 	}
 
+	@Override
+	public Suggestion updateVoteCountFor(final String suggestionId) {
+		Preconditions.checkNotNull(suggestionId, "suggestionId must not be null");
+		
+		final Suggestion suggestion = suggestionRepository.findOne(suggestionId);
+		if (suggestion == null) {
+			throw new IllegalArgumentException(String.format("Suggestion with the id [%s] not found", suggestionId));
+		}
+		
+		suggestion.addToTotalVote();
+		suggestionRepository.save(suggestion);
+		
+		return suggestion;
+	}
+
 }

@@ -22,4 +22,13 @@ public interface SuggestionService {
 	 * @return the newly added suggestion, including it's id
 	 */
 	Suggestion save(Suggestion suggestion);
+	
+	/**
+	 * Searches for the {@link Suggestion} with the given id, and updates the totalVoteCount
+	 * 
+	 * @param suggestionId (must not be {@code null}
+	 * @return the updated {@link Suggestion}
+	 * @throws IllegalArgumentException in case the suggestion is not found
+	 */
+	Suggestion updateVoteCountFor(String suggestionId);
 }
