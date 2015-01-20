@@ -26,7 +26,7 @@ class VotingMessageServiceImpl implements MessageSendingService<Vote> {
 	public void sendMessage(final Vote vote) {
 		jmsOperations.send("at.lunchinator.vote", session -> {
 			final MapMessage message = session.createMapMessage();
-			message.setStringProperty("id", vote.getId());
+			message.setStringProperty("id", vote.getTarget());
 			message.setStringProperty("text", "Hello World from MappedMessage inside VotingLambda");
 			return message;
 		});

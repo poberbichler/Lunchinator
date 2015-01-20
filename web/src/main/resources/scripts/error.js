@@ -9,6 +9,11 @@
                     });
                 }
 
+                if (response.status === 500) {
+                    errorService.reset();
+                    errorService.addError({message: 'Something went wrong...'});
+                }
+
                 return $q.reject(response);
             }
         }
