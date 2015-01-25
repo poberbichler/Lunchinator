@@ -8,9 +8,9 @@
 
 	<properties>
 		<java.version>1.8</java.version>
-		<spring-boot.version>1.2.0.RELEASE</spring-boot.version>
-
-		<thymeleaf-layout-dialect.version>1.2.5</thymeleaf-layout-dialect.version>
+		<maven.compiler.source>${java.version}</maven.compiler.source>
+		<maven.compiler.target>${java.version}</maven.compiler.target>
+		
 		<angularjs.version>1.3.6</angularjs.version>
 		<bootstrap.version>3.3.1</bootstrap.version>
 		<angular-ui-router.version>0.2.13</angular-ui-router.version>
@@ -19,29 +19,26 @@
 		<jquery.version>2.1.3</jquery.version>
 	</properties>
 
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.2.1.RELEASE</version>
+	</parent>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter</artifactId>
-			<version>${spring-boot.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-			<version>${spring-boot.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
-			<version>${spring-boot.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>nz.net.ultraq.thymeleaf</groupId>
 			<artifactId>thymeleaf-layout-dialect</artifactId>
-			<version>${thymeleaf-layout-dialect.version}</version>
 		</dependency>
 
 		<!-- WEBJARS -->
@@ -81,19 +78,4 @@
 			<version>${jquery.version}</version>
 		</dependency>
 	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
-
-				<configuration>
-					<source>${java.version}</source>
-					<target>${java.version}</target>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
 </project>
