@@ -22,7 +22,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD})
-@Constraint(validatedBy = Jsr310FutureLocalDateTimeValidaotr.class)
+@Constraint(validatedBy = Jsr310FutureLocalDateTimeValidator.class)
 public @interface Jsr310Past {
 	String message() default "{javax.validation.constraints.Past.message}";
 

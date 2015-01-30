@@ -6,6 +6,7 @@
 				votedElement: '=element'
 			},
 			template:
+				'by: {{::votedElement.suggestedBy}}' +
 				'<div class="voting-details">' +
 					'<span ng-class="{ownVote: isOwnVote}"><a class="glyphicon glyphicon-thumbs-up"></a>({{upvotes}})</span>' +
 					'<span ng-class="{ownVote: isOwnVote === false}"><a class="glyphicon glyphicon-thumbs-down"></a>({{downvotes}})</span>' +
