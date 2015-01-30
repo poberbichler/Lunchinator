@@ -13,7 +13,7 @@ import javax.validation.ConstraintValidatorContext;
  * @author poberbichler
  * @since 01.2015
  */
-public class Jsr310FutureLocalDateTimeValidaotr implements ConstraintValidator<Jsr310Past, LocalDateTime> {
+public class Jsr310FutureLocalDateTimeValidator implements ConstraintValidator<Jsr310Past, LocalDateTime> {
 
 	@Override
 	public boolean isValid(LocalDateTime value, ConstraintValidatorContext context) {
