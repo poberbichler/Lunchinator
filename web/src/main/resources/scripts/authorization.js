@@ -28,6 +28,7 @@
 		
 		function setCurrentUser(user) {
 			currentUserIndex = userList.indexOf(user);
+			localStorage.clear();
 		}
 	}
 	

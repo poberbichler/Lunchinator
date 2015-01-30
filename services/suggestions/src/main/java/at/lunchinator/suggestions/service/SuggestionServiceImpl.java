@@ -72,5 +72,11 @@ class SuggestionServiceImpl implements SuggestionService {
 		
 		return suggestion;
 	}
-
+	
+	@Override
+	public Collection<Suggestion> findUpcoming() {
+		return suggestionRepository.findAll().parallelStream()
+			.filter(suggestion -> suggestion.isUpcoming())
+			.collect(Collectors.toList());
+	}
 }

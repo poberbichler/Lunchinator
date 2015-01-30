@@ -32,6 +32,11 @@ public class SuggestionEndpoint {
 		return suggestionService.findAll();
 	}
 	
+	@RequestMapping(value = "upcoming")
+	public Collection<Suggestion> findUpcoming() {
+		return suggestionService.findUpcoming();
+	}
+	
 	@RequestMapping(value = "save", method = RequestMethod.POST)
 	public Suggestion save(@RequestBody Suggestion suggestion, @RequestHeader("Authorization") String userId) {
 		suggestion.setSuggestedBy(userId);

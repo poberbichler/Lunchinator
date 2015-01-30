@@ -21,7 +21,7 @@ public class Jsr310FutureLocalDateTimeValidator implements ConstraintValidator<J
 			return false;
 		}
 		
-		return value.isBefore(LocalDateTime.now());
+		return value.isBefore(LocalDateTime.now()) || value.isEqual(LocalDateTime.now());
 	}
 
 	@Override

@@ -31,4 +31,9 @@ public interface SuggestionService {
 	 * @throws IllegalArgumentException in case the suggestion is not found
 	 */
 	Suggestion updateVoteCountFor(String suggestionId);
+	
+	/**
+	 * @return a {@link Collection} of every {@link Suggestion} with a future from and to date
+	 */
+	Collection<Suggestion> findUpcoming();
 }

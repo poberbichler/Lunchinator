@@ -37,16 +37,32 @@
 			},
 			template:
 				'<span class="voting-input pull-right">' +
-					'<a href="" ng-click="upvote()" class="glyphicon glyphicon-thumbs-up"></a>' +
-					'<a href="" ng-click="downvote()" class="glyphicon glyphicon-thumbs-down"></a>' +
+					'<a href="" ng-click="upvote()" ng-class="{voted: isVote(true)}" class="glyphicon glyphicon-thumbs-up"></a>' +
+					'<a href="" ng-click="downvote()" ng-class="{voted: isVote(false)}" class="glyphicon glyphicon-thumbs-down"></a>' +
 				'</span>',
 			link: function(scope) {
 				scope.upvote = function() {
-					votingResource.save({target: scope.votedElement.id, upvote: true});
+					votingResource.save({target: scope.votedElement.id, upvote: true}, function(result) {
+						scope.votedElement.totalVotes++;
+						localStorage[scope.votedElement.id] = true;
+					});
 				}
 
 				scope.downvote = function() {
-					votingResource.save({target: scope.votedElement.id, upvote: false});
+					votingResource.save({target: scope.votedElement.id, upvote: false}, function(result) {
+						scope.votedElement.totalVotes++;
+						localStorage[scope.votedElement.id] = false;
+					});
+				}
+				
+				scope.isVote = function(value) {
+					var element = localStorage[scope.votedElement.id];
+					
+					if (element === undefined) {
+						return false;
+					}
+					
+					return element === value.toString();
 				}
 			}
 		}

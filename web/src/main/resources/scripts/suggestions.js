@@ -16,7 +16,7 @@
 		}
 		
 		function init() {
-			suggestionData.suggestions = suggestionResource.findAll();
+			suggestionData.suggestions = suggestionResource.findUpcoming();
 			suggestionData.availableRestaurants = restaurantResource.findAvailable();
 	
 			suggestionData.newSuggestion = {};
@@ -33,7 +33,8 @@
 	function SuggestionResource($resource, BASE_URLS) {
 		return $resource(BASE_URLS.suggestions + ':methodName', {}, {
 			findAll: {method: 'GET', isArray: true, params: {methodName: 'all'}},
-			save: {method: 'POST', params: {methodName: 'save'}}
+			save: {method: 'POST', params: {methodName: 'save'}},
+			findUpcoming: {method: 'GET', isArray: true, params: {methodName: 'upcoming'}}
 		})
 	}
 	

@@ -5,12 +5,16 @@
 				Suggestion to go to: {{::suggestion.fullRestaurant.name}}
 			    <voting-input element="suggestion"></voting-input>
 			</div>
-			
 			<div class="panel-body">
-				time: {{::suggestion.startTime | date:'HH:MM' }} - {{::suggestion.endTime | date:'HH:MM'}}<br />
-				total votes: {{::suggestion.totalVotes}}<br />
+				by: {{::suggestion.suggestedBy}}<br />
+				restaurant: {{::suggestion.fullRestaurant.name}}<br />
+				from: {{::suggestion.startTime | date:'medium' }}<br />
+				to: {{::suggestion.endTime | date:'medium'}}<br />
+				total votes: {{suggestion.totalVotes}}
+
 				<voting-details element="suggestion"></voting-details>
 			</div>
+				
 		</div> 
 	</div>
 </div>

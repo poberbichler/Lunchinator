@@ -33,7 +33,6 @@ public class Vote {
 	private String author;
 
 	@NotNull
-	@Jsr310Past
 	private LocalDateTime createdAt;
 
 	/**
