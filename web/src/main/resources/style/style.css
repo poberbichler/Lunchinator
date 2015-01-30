@@ -36,3 +36,7 @@ div.datetimepicker {
 .voting-details span.ownVote a {
 	color: green;
 }
+
+.voted {
+	text-decoration: underline;
+}
