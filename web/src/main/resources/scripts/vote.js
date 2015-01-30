@@ -42,10 +42,12 @@
 			link: function(scope) {
 				scope.upvote = function() {
 					votingResource.save({target: scope.votedElement.id, upvote: true});
+					scope.votedElement.totalVotes++;
 				}
 
 				scope.downvote = function() {
 					votingResource.save({target: scope.votedElement.id, upvote: false});
+					scope.votedElement.totalVotes++;
 				}
 			}
 		}

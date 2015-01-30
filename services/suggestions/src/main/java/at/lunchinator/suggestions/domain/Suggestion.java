@@ -52,6 +52,14 @@ public class Suggestion {
 	}
 	
 	/**
+	 * @return {@code true} if both {@link #startTime} and {@link #endTime} are in the future, {@code false} otherwise
+	 */
+	public boolean isUpcoming() {
+		final LocalDateTime now = LocalDateTime.now();
+		return startTime.isAfter(now) && endTime.isAfter(now);
+	}
+	
+	/**
 	 * private default constructor, needed by various frameworks
 	 */
 	private Suggestion() {
