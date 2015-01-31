@@ -2,16 +2,13 @@ package at.lunchinator.suggestions.service;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
-import java.util.Map;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import at.lunchinator.suggestions.aspect.IncludeRestaurants;
 import at.lunchinator.suggestions.data.db.SuggestionRepository;
-import at.lunchinator.suggestions.data.rest.RestaurantRepository;
-import at.lunchinator.suggestions.domain.RestaurantDTO;
 import at.lunchinator.suggestions.domain.Suggestion;
 
 import com.google.common.base.Preconditions;
@@ -23,29 +20,24 @@ import com.google.common.base.Preconditions;
 @Service
 class SuggestionServiceImpl implements SuggestionService {
 	private final SuggestionRepository suggestionRepository;
-	private final RestaurantRepository restaurantRepository;
 
 	@Autowired
-	public SuggestionServiceImpl(SuggestionRepository suggestionRepository, RestaurantRepository restaurantRepository) {
+	public SuggestionServiceImpl(SuggestionRepository suggestionRepository) {
 		this.suggestionRepository = suggestionRepository;
-		this.restaurantRepository = restaurantRepository;
 	}
 
 	@Override
+	@IncludeRestaurants
 	public Collection<Suggestion> findAll() {
-		final Collection<Suggestion> suggestions = suggestionRepository.findAll();
-		final Collection<String> restaurantSet = suggestions.parallelStream()
-				.map(Suggestion::getRestaurant)
-				.collect(Collectors.toSet());
-		
-		final Collection<RestaurantDTO> restaurants = restaurantRepository.findByIds(restaurantSet);
-		final Map<String, RestaurantDTO> restaurantMap = restaurants.parallelStream()
-				.collect(Collectors.toMap(RestaurantDTO::getId, Function.identity()));
-		
-		suggestions.parallelStream().forEach(suggestion -> 
-				suggestion.setFullRestaurant(restaurantMap.get(suggestion.getRestaurant())));
-		
-		return suggestions;
+		return suggestionRepository.findAll();
+	}
+	
+	@Override
+	@IncludeRestaurants
+	public Collection<Suggestion> findUpcoming() {
+		return suggestionRepository.findAll().parallelStream()
+			.filter(suggestion -> suggestion.isUpcoming())
+			.collect(Collectors.toList());
 	}
 
 	@Override
@@ -72,11 +64,4 @@ class SuggestionServiceImpl implements SuggestionService {
 		
 		return suggestion;
 	}
-	
-	@Override
-	public Collection<Suggestion> findUpcoming() {
-		return suggestionRepository.findAll().parallelStream()
-			.filter(suggestion -> suggestion.isUpcoming())
-			.collect(Collectors.toList());
-	}
-}
+}	
