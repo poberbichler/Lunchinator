@@ -1,6 +1,7 @@
 package at.lunchinator.commons.error;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Locale;
 
@@ -30,7 +31,7 @@ public class LunchinatorExceptionHandler {
 	@ResponseBody
 	@ResponseStatus(value = HttpStatus.BAD_REQUEST)
 	@ExceptionHandler({ ConstraintViolationException.class })
-	public Collection<ErrorContainer> handleException(final ConstraintViolationException caughtException) {
+	public Collection<ErrorContainer> handleConstraintViolationException(final ConstraintViolationException caughtException) {
 		final Collection<ErrorContainer> result = new ArrayList<>(caughtException.getConstraintViolations().size());
 		final Locale locale = LocaleContextHolder.getLocale();
 		
@@ -42,6 +43,14 @@ public class LunchinatorExceptionHandler {
 		}
 
 		return result;
+	}
+	
+	@ResponseBody
+	@ExceptionHandler
+	@ResponseStatus(value = HttpStatus.BAD_REQUEST)
+	public Collection<ErrorContainer> handleGeneralException(final Exception caughtException) {
+		// TODO: shows the error directly to the user. only useful for development
+		return Arrays.asList(new ErrorContainer("", caughtException.getLocalizedMessage()));
 	}
 	
 	private String convertToProperty(final ConstraintViolation<?> violation) {

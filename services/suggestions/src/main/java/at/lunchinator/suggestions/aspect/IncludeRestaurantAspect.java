@@ -30,13 +30,13 @@ public class IncludeRestaurantAspect {
 		this.restaurantRepository = restaurantRepository;
 	}
 
-	@Pointcut("@annotation(at.lunchinator.suggestions.aspect.IncludeRestaurant)")
+	@Pointcut("@annotation(at.lunchinator.suggestions.aspect.IncludeRestaurants)")
 	public void methodAnnotated() {
 		// empty method
 	}
 
 	@AfterReturning(returning = "suggestions", value = "methodAnnotated()")
-	public void doMoreStuff(final Collection<Suggestion> suggestions) {
+	public void updateCollectionWithRestaurants(final Collection<Suggestion> suggestions) {
 		final Set<String> restaurantIds = suggestions.parallelStream()
 				.map(Suggestion::getRestaurant)
 				.collect(Collectors.toSet());

@@ -6,8 +6,7 @@
 				votedElement: '=element'
 			},
 			template:
-				'by: {{::votedElement.suggestedBy}}' +
-				'<div class="voting-details">' +
+				'<div class="voting-details" ng-show="alreadyVoted()">' +
 					'<span ng-class="{ownVote: isOwnVote}"><a class="glyphicon glyphicon-thumbs-up"></a>({{upvotes}})</span>' +
 					'<span ng-class="{ownVote: isOwnVote === false}"><a class="glyphicon glyphicon-thumbs-down"></a>({{downvotes}})</span>' +
 				'</div>',
@@ -25,11 +24,15 @@
 						}
 					});
 				});
+				
+				scope.alreadyVoted = function() {
+					return localStorage[authorizationService.generateStorageKey(scope.votedElement.id)] !== undefined;
+				}
 			}
 		}
 	}
 
-	function VotingInput(votingResource) {
+	function VotingInput(votingResource, authorizationService) {
 		return {
 			restrict: 'E',
 			scope: {
@@ -44,19 +47,19 @@
 				scope.upvote = function() {
 					votingResource.save({target: scope.votedElement.id, upvote: true}, function(result) {
 						scope.votedElement.totalVotes++;
-						localStorage[scope.votedElement.id] = true;
+						localStorage[authorizationService.generateStorageKey(scope.votedElement.id)] = true;
 					});
 				}
 
 				scope.downvote = function() {
 					votingResource.save({target: scope.votedElement.id, upvote: false}, function(result) {
 						scope.votedElement.totalVotes++;
-						localStorage[scope.votedElement.id] = false;
+						localStorage[authorizationService.generateStorageKey(scope.votedElement.id)] = false;
 					});
 				}
 				
 				scope.isVote = function(value) {
-					var element = localStorage[scope.votedElement.id];
+					var element = localStorage[authorizationService.generateStorageKey(scope.votedElement.id)];
 					
 					if (element === undefined) {
 						return false;
@@ -76,7 +79,7 @@
 	}
 	
 	angular.module('lunchinator.voting', [])
-		.directive('votingInput', ['VotingResource', VotingInput])
+		.directive('votingInput', ['VotingResource', 'AuthorizationService', VotingInput])
 		.directive('votingDetails', ['VotingResource', 'AuthorizationService', VotingDetails])
 		.factory('VotingResource', ['$resource', 'BASE_URLS', VotingResource])
 })();

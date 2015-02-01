@@ -19,7 +19,8 @@
 		return {
 			userList: userList,
 			getCurrentUser: getCurrentUser,
-			setCurrentUser: setCurrentUser
+			setCurrentUser: setCurrentUser,
+			generateStorageKey: generateStorageKey
 		}
 		
 		function getCurrentUser() {
@@ -28,7 +29,10 @@
 		
 		function setCurrentUser(user) {
 			currentUserIndex = userList.indexOf(user);
-			localStorage.clear();
+		}
+		
+		function generateStorageKey(id) {
+			return getCurrentUser().name + '_' + id;
 		}
 	}
 	

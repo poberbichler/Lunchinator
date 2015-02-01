@@ -40,3 +40,15 @@ div.datetimepicker {
 .voted {
 	text-decoration: underline;
 }
+
+.suggestion-details {
+	margin-bottom: 0;
+}
+
+.suggestion-details dt {
+	width: auto;
+}
+
+.suggestion-details dd {
+	margin-left: 100px;
+}

@@ -2,16 +2,18 @@
 	<div class="col-md-6" ng-repeat="suggestion in suggestionCtrl.data.suggestions">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
-				Suggestion to go to: {{::suggestion.fullRestaurant.name}}
+				Suggestion to go to: {{::suggestion.fullRestaurant.name}} - total votes: {{suggestion.totalVotes}}
 			    <voting-input element="suggestion"></voting-input>
 			</div>
 			<div class="panel-body">
-				by: {{::suggestion.suggestedBy}}<br />
-				restaurant: {{::suggestion.fullRestaurant.name}}<br />
-				from: {{::suggestion.startTime | date:'medium' }}<br />
-				to: {{::suggestion.endTime | date:'medium'}}<br />
-				total votes: {{suggestion.totalVotes}}
-
+				<dl class="dl-horizontal suggestion-details">
+					<dt>starting</dt>
+					<dd>{{::suggestion.startTime | date:'medium'}}</dd>
+					
+					<dt>until likely</dt>
+					<dd>{{::suggestion.endTime | date:'medium'}}</dd>
+				</dl>
+				
 				<voting-details element="suggestion"></voting-details>
 			</div>
 				
