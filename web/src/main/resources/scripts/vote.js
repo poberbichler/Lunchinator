@@ -1,5 +1,5 @@
 (function() {
-	function VotingDetails(votingResource, authorizationService) {
+	function VotingDetails($rootScope, votingResource, authorizationService) {
 		return {
 			restrict: 'E',
 			scope: {
@@ -16,23 +16,38 @@
 				scope.downvotes = 0;
 				scope.isOwnVote = undefined;
 
-				votingResource.findByTarget({targetId: scope.votedElement.id}, function(result) {
-					angular.forEach(result, function(vote) {
-						vote.upvote ? scope.upvotes++ : scope.downvotes++;
-						if (vote.author === authorizationService.getCurrentUser().name) {
-							scope.isOwnVote = vote.upvote;
-						}
-					});
-				});
-				
 				scope.alreadyVoted = function() {
 					return localStorage[authorizationService.generateStorageKey(scope.votedElement.id)] !== undefined;
+				}
+				
+				if (scope.alreadyVoted()) {
+					loadVotes();
+				}
+				
+				$rootScope.$on("vote:add", function(event, data) {
+					if (scope.votedElement.id === data.id) {
+						loadVotes();
+					}
+				});
+				
+				function loadVotes() {
+					votingResource.findByTarget({targetId: scope.votedElement.id}, function(result) {
+						scope.upvotes = 0;
+						scope.downvotes = 0;
+						
+						angular.forEach(result, function(vote) {
+							vote.upvote ? scope.upvotes++ : scope.downvotes++;
+							if (vote.author === authorizationService.getCurrentUser().name) {
+								scope.isOwnVote = vote.upvote;
+							}
+						});
+					});
 				}
 			}
 		}
 	}
 
-	function VotingInput(votingResource, authorizationService) {
+	function VotingInput($rootScope, votingResource, authorizationService) {
 		return {
 			restrict: 'E',
 			scope: {
@@ -43,18 +58,20 @@
 					'<a href="" ng-click="upvote()" ng-class="{voted: isVote(true)}" class="glyphicon glyphicon-thumbs-up"></a>' +
 					'<a href="" ng-click="downvote()" ng-class="{voted: isVote(false)}" class="glyphicon glyphicon-thumbs-down"></a>' +
 				'</span>',
+				
 			link: function(scope) {
 				scope.upvote = function() {
-					votingResource.save({target: scope.votedElement.id, upvote: true}, function(result) {
-						scope.votedElement.totalVotes++;
-						localStorage[authorizationService.generateStorageKey(scope.votedElement.id)] = true;
-					});
+					saveVote(true);
 				}
-
 				scope.downvote = function() {
-					votingResource.save({target: scope.votedElement.id, upvote: false}, function(result) {
+					saveVote(false);
+				}
+				
+				function saveVote(currentVote) {
+					votingResource.save({target: scope.votedElement.id, upvote: currentVote}, function(result) {
 						scope.votedElement.totalVotes++;
-						localStorage[authorizationService.generateStorageKey(scope.votedElement.id)] = false;
+						localStorage[authorizationService.generateStorageKey(scope.votedElement.id)] = currentVote;
+						$rootScope.$emit("vote:add", scope.votedElement);
 					});
 				}
 				
@@ -79,7 +96,7 @@
 	}
 	
 	angular.module('lunchinator.voting', [])
-		.directive('votingInput', ['VotingResource', 'AuthorizationService', VotingInput])
-		.directive('votingDetails', ['VotingResource', 'AuthorizationService', VotingDetails])
+		.directive('votingInput', ['$rootScope', 'VotingResource', 'AuthorizationService', VotingInput])
+		.directive('votingDetails', ['$rootScope', 'VotingResource', 'AuthorizationService', VotingDetails])
 		.factory('VotingResource', ['$resource', 'BASE_URLS', VotingResource])
 })();
