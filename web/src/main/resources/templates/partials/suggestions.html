@@ -11,12 +11,11 @@
 					<dd>{{::suggestion.startTime | date:'medium'}}</dd>
 					
 					<dt>until likely</dt>
-					<dd>{{::suggestion.endTime | date:'medium'}}</dd>
+					<dd>{{::suggestion.endTime | date:'medium'}}</dd>
 				</dl>
 				
 				<voting-details element="suggestion"></voting-details>
 			</div>
-				
 		</div> 
 	</div>
 </div>
@@ -50,18 +49,12 @@
 	
 	<div class="form-group">
 		<label for="endTime" th:text="#{suggestions.planned.end.time}">Planned end time</label>
-		<div class="dropdown">
-		    <a class="dropdown-toggle" id="endtimeToggle" role="button" data-toggle="dropdown" data-target="#" href="">
-		        <div class="input-group">
-		        	<input type="text" class="form-control" ng-model="suggestionCtrl.data.newSuggestion.endTime"/>
-		        	<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-		        </div>
-		    </a>
-		    <ul class="dropdown-menu" role="menu">
-		        <datetimepicker data-ng-model="suggestionCtrl.data.newSuggestion.endTime"
-					data-datetimepicker-config="{ dropdownSelector: '#endtimeToggle' }" />
-		    </ul>
+		<div class="input-group">
+			<input id="endTime" ng-model="suggestionCtrl.data.newSuggestion.endTime" class="form-control" />
+			<span>{{suggestionCtrl.data.newSuggestion.endTime}}</span>
+			<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 		</div>
+		<time-directive date="suggestionCtrl.data.newSuggestion.endTime"></time-directive>
 	</div>
 	
 	<button type="submit" class="btn btn-primary">Submit</button>
