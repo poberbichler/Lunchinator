@@ -2,6 +2,7 @@
 	function SuggestionCtrl(suggestionService) {
 		this.data = suggestionService.data;
 		this.save = suggestionService.save;
+		this.updatePlannedEndTime = suggestionService.updateEndTime;
 		
 		suggestionService.init();
 	}
@@ -12,15 +13,23 @@
 		return {
 			data: suggestionData,
 			init: init,
-			save: save
+			save: save,
+			
+			updateEndTime: updateEndTime
 		}
 		
 		function init() {
 			suggestionData.suggestions = suggestionResource.findUpcoming();
 			suggestionData.availableRestaurants = restaurantResource.findAvailable();
-	
-			suggestionData.newSuggestion = {endTime: new Date()};
-			console.log('init called');
+			
+			var nextStartTime = new Date();
+			if (nextStartTime.getHours() > 12) {
+				nextStartTime.setDate(nextStartTime.getDate() + 1);
+			}
+			
+			nextStartTime.setHours(11, 30);
+			suggestionData.newSuggestion = { startTime: nextStartTime }
+			updateEndTime(nextStartTime);
 		}
 		
 		function save() {
@@ -28,6 +37,13 @@
 				suggestionData.suggestions.push(result);
 				suggestionData.newSuggestion = {};
 			});
+		}
+		
+		function updateEndTime(startTime) {
+			var endTime = new Date(startTime.getTime());
+			endTime.setMinutes(endTime.getMinutes() + 60);
+			
+			suggestionData.newSuggestion.endTime = endTime;
 		}
 	}
 	

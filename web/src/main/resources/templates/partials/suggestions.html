@@ -42,7 +42,8 @@
 		    </a>
 		    <ul class="dropdown-menu" role="menu">
 		        <datetimepicker data-ng-model="suggestionCtrl.data.newSuggestion.startTime" 
-					data-datetimepicker-config="{ dropdownSelector: '#starttimeToggle' }" />
+					data-datetimepicker-config="{ dropdownSelector: '#starttimeToggle' }" 
+					data-on-set-time="suggestionCtrl.updatePlannedEndTime(newDate, oldDate)"/>
 		    </ul>
 		</div>
 	</div>
@@ -50,11 +51,9 @@
 	<div class="form-group">
 		<label for="endTime" th:text="#{suggestions.planned.end.time}">Planned end time</label>
 		<div class="input-group">
-			<input id="endTime" ng-model="suggestionCtrl.data.newSuggestion.endTime" class="form-control" />
-			<span>{{suggestionCtrl.data.newSuggestion.endTime}}</span>
-			<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+			<span>{{suggestionCtrl.data.newSuggestion.endTime | date:'medium'}}</span>
+			<time-directive date="suggestionCtrl.data.newSuggestion.endTime"></time-directive>
 		</div>
-		<time-directive date="suggestionCtrl.data.newSuggestion.endTime"></time-directive>
 	</div>
 	
 	<button type="submit" class="btn btn-primary">Submit</button>
