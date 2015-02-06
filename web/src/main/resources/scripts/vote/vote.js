@@ -6,10 +6,10 @@
 				votedElement: '=element'
 			},
 			template:
-				'<div class="voting-details" ng-show="alreadyVoted()">' +
-					'<span ng-class="{ownVote: isOwnVote}"><a class="glyphicon glyphicon-thumbs-up"></a>({{upvotes}})</span>' +
-					'<span ng-class="{ownVote: isOwnVote === false}"><a class="glyphicon glyphicon-thumbs-down"></a>({{downvotes}})</span>' +
-				'</div>',
+				'<span class="voting-details" ng-show="alreadyVoted()">' +
+				'	<span ng-class="{ownVote: isOwnVote}"><a class="glyphicon glyphicon-thumbs-up"></a>({{upvotes}})</span>' +
+				'	<span ng-class="{ownVote: isOwnVote === false}"><a class="glyphicon glyphicon-thumbs-down"></a>({{downvotes}})</span>' +
+				'</span>',
 				
 			link: function(scope) {
 				scope.upvotes = 0;
@@ -55,8 +55,8 @@
 			},
 			template:
 				'<span class="voting-input pull-right">' +
-					'<a href="" ng-click="upvote()" ng-class="{voted: isVote(true)}" class="glyphicon glyphicon-thumbs-up"></a>' +
-					'<a href="" ng-click="downvote()" ng-class="{voted: isVote(false)}" class="glyphicon glyphicon-thumbs-down"></a>' +
+				'	<a href="" ng-click="upvote()" ng-class="{voted: isVote(true)}" class="glyphicon glyphicon-thumbs-up"></a>' +
+				'	<a href="" ng-click="downvote()" ng-class="{voted: isVote(false)}" class="glyphicon glyphicon-thumbs-down"></a>' +
 				'</span>',
 				
 			link: function(scope) {

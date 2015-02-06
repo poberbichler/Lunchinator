@@ -5,16 +5,22 @@
 				Suggestion to go to: {{::suggestion.fullRestaurant.name}} - total votes: {{suggestion.totalVotes}}
 			    <voting-input element="suggestion"></voting-input>
 			</div>
-			<div class="panel-body">
-				<dl class="dl-horizontal suggestion-details">
-					<dt>starting</dt>
-					<dd>{{::suggestion.startTime | date:'medium'}}</dd>
+			<div class="panel-body suggestion">
+				<div class="row">
+					<div class="col-md-8">
+						<dl class="dl-horizontal suggestion-details">
+							<dt>starting</dt>
+							<dd>{{::suggestion.startTime | date:'medium'}}</dd>
+							
+							<dt>until likely</dt>
+							<dd>{{::suggestion.endTime | date:'medium'}}</dd>
+						</dl>
+					</div>
 					
-					<dt>until likely</dt>
-					<dd>{{::suggestion.endTime | date:'medium'}}</dd>
-				</dl>
-				
-				<voting-details element="suggestion"></voting-details>
+					<div class="col-md-4">
+						<voting-details element="suggestion"></voting-details>
+					</div>
+				</div>
 			</div>
 		</div> 
 	</div>

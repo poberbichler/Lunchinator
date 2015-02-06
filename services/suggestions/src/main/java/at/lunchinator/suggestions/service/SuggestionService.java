@@ -2,6 +2,7 @@ package at.lunchinator.suggestions.service;
 
 import java.util.Collection;
 
+import at.lunchinator.suggestions.domain.RestaurantDTO;
 import at.lunchinator.suggestions.domain.Suggestion;
 
 /**
@@ -19,7 +20,7 @@ public interface SuggestionService {
 	 * If it is a new {@link Suggestion}, a new one will be created and saved in the db. Otherwise the existing {@link Suggestion} will be updated
 	 * 
 	 * @param suggestion to be saved
-	 * @return the newly added suggestion, including it's id
+	 * @return the newly added suggestion, including it's id and the {@link RestaurantDTO}
 	 */
 	Suggestion save(Suggestion suggestion);
 	
