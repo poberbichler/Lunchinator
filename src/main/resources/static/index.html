@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/style.css" rel="stylesheet">
+	
+	<script src="/webjars/jquery/jquery.min.js"></script>
+    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+    
+	<title>Lunchinator</title>
+</head>
+
+<body>
+<div class="container">
+	<div class="jumbotron">
+		<h1>Open Lunches</h1>
+		<ul id="lunch-list">
+		</ul>
+		
+		<form class="form-inline">
+			<div class="form-group">
+				<label for="lunch-name">Add Lunch</label>
+				<input type="text" id="lunch-name" class="form-control" />
+			</div>
+			<button id="add-lunch" class="btn btn-default" type="submit">Add</button>
+		</form>
+	</div>
+</div>
+</body>
+
+<script type="text/javascript">
+	var socket = new SockJS('/lunchinator');
+	var stompClient = Stomp.over(socket);
+	stompClient.connect({}, function(frame) {
+		console.log('connected to', frame);
+		stompClient.subscribe('/topic/lunches', function(lunch) {
+			console.log('received from sub', lunch);
+			createLunch(JSON.parse(lunch.body));
+		});
+	});
+	
+
+	$.get('/api/lunch', createLunchList);
+	
+	function createLunchList(data) {
+		$.each(data, function(index, lunch) {
+			createLunch(lunch);
+		});
+	}
+	
+	function createLunch(lunch) {
+		console.log('creating', lunch);
+		$('#lunch-list').append('<li>' + lunch.name + '</li>')
+	}
+	
+	function addLunch() {
+		stompClient.send('/app/add', {}, JSON.stringify({'name': $('#lunch-name').val()}));
+		$('#lunch-name').val('');
+	}
+	
+	
+	$('#add-lunch').click(addLunch);
+	$('form').on('submit', function(event) {
+		event.preventDefault();
+	});
+</script>
+</html>
